@@ -1,6 +1,7 @@
 const path = require("path");
 let htmlwebpackplugin = require("html-webpack-plugin"); //引入html-webpack-plugin插件
 const { rule } = require("_postcss@7.0.32@postcss");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -29,6 +30,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
+      },
     ],
   },
   plugins: [
@@ -44,10 +49,12 @@ module.exports = {
       // chunks: "./7-21/webpack/dis/build.js", //可以设置chunks按需引入JS文件，不设置就会引入所有产出的js
       // chunksSortMode: "manual", //将chunks按引入的顺序排序,不用这个的话,引入到html的JS可能是错乱排序的
     }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     contentBase: path.join(__dirname, "/7-21/webpack/dis/"),
     compress: true,
     port: 9000,
+    open: true,
   },
 };
