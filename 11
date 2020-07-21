@@ -1,0 +1,26 @@
+const path = require("path");
+const htmlPackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  entry: {
+    main: "./7-21/webpack/main.js", //入口文件
+  },
+  output: {
+    // 把所有依赖的模块合并输出到一个 bundle.js 文件
+    filename: "bundle.js",
+    // 输出文件都放到 dist 目录下
+    path: path.resolve(__dirname, "./7-21/webpack/dis"),
+  },
+  module: {},
+  plugins: [
+    // new htmlPackPlugin({
+    //   template: "./SggCourseOffline/7-21",
+    //   filename: "index.html",
+    //   chunks: [
+    //     "./SggCourseOffline/7-21/webpack/dis/bundle.js",
+    //     "./SggCourseOffline/7-21/webpack/dis/111.js",
+    //   ],
+    //   chunksSortMode: "manual",
+    // }),
+  ],
+};
