@@ -12,22 +12,10 @@ module.exports = {
   },
   mode: "development",
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"],
-      },
-      {
-        test: /\.(png|jpe?g|gif|wepb)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 12 * 1024,
-              name: "[hash:10].[ext]",
-            },
-          },
-        ],
+        use: ["less-loader", "css-loader", "style-loader"],
       },
     ],
   },
@@ -40,14 +28,9 @@ module.exports = {
     //new一个模板出来
     new htmlwebpackplugin({
       template: "./7-21/webpack/index.html", //入口文件
-      // filename: "home2.html", //产出文件
-      // chunks: "./7-21/webpack/dis/build.js", //可以设置chunks按需引入JS文件，不设置就会引入所有产出的js
-      // chunksSortMode: "manual", //将chunks按引入的顺序排序,不用这个的话,引入到html的JS可能是错乱排序的
+      filename: "home2.html", //产出文件
+      chunks: "./7-21/webpack/dis/build.js", //可以设置chunks按需引入JS文件，不设置就会引入所有产出的js
+      chunksSortMode: "manual", //将chunks按引入的顺序排序,不用这个的话,引入到html的JS可能是错乱排序的
     }),
   ],
-  devServer: {
-    contentBase: path.join(__dirname, "/7-21/webpack/dis/"),
-    compress: true,
-    port: 9000,
-  },
 };
