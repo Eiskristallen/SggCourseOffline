@@ -5,10 +5,10 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    main: __dirname + "/722/webpack/main.js", //入口文件
+    main: "./722/webpack/main.js", //入口文件
   },
   output: {
-    path: __dirname + "/722/webpack/dis",
+    path: __dirname + "/../722/webpack/dis",
     filename: "build.js", //产出文件，name根据entry的入口文件键名定
   },
   mode: "development",
@@ -53,7 +53,7 @@ module.exports = {
   ],
   devServer: {
     //devserver在内存中编译打包,所以不会有输出文件
-    contentBase: path.join(__dirname, "/722/webpack/dis/"),
+    contentBase: path.join(__dirname, "../722/webpack/dis/"),
     compress: true,
     port: 9000,
     open: true,
