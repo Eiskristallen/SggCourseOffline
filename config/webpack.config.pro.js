@@ -110,15 +110,14 @@ module.exports = {
     new MinicssExtractPlugin({
       filename: "css/[name].css", //[name]chunk的名字默认就是main
     }),
-    // new OptimizeCssAssetsPlugin({
-    //   // assetNameRegExp: /\.optimize\.css$/g,
-    //   // cssProcessor: require("cssnano"),
-    //   cssProcessorPluginOptions: {
-    //     preset: ["default", { discardComments: { removeAll: true } }],
-    //   },
-    //   // canPrint: true,
-    // }),
-    // new CleanWebpackPlugin(),
+    new OptimizeCssAssetsPlugin({
+      // assetNameRegExp: /\.css$/g,
+      // cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ["default", { discardComments: { removeAll: true } }],
+      },
+      // canPrint: true
+    }),
   ],
   //   devServer: {
   //     //devserver在内存中编译打包,所以不会有输出文件

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./promise.js"></script>
+  </head>
+  <body>
+    <script>
+      const a = new Mypromise((res, rej) => {
+        res(101);
+      });
+      // .finally((val) => {
+      //   console.log(val);
+      // })
+      // .then((val) => {
+      //   console.log(val + "11");
+      // });
+      const b = new Mypromise((res) => {
+        res(10);
+      });
+      const c = new Mypromise((res, rej) => {
+        rej(202);
+      });
+      const s = Mypromise.allSettled([a, b, c]);
+      console.log(
+        s.then((val) => {
+          console.log(val);
+        })
+      );
+    </script>
+  </body>
+</html>
