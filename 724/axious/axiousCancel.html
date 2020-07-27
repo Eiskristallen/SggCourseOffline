@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn1">request</button>
+    <button id="btn2">cancel</button>
+    <script src="./axios.min.js"></script>
+    <script>
+      const CancelToken = axios.CancelToken;
+      const source = CancelToken.source();
+      document.getElementById("btn1").onclick = function () {
+        axios({
+          url: "xxxxx",
+          CancelToken: source.token,
+        })
+          .then((val) => {
+            console.log(val);
+          })
+          .catch((rea) => {
+            if (axios.isCancel(err)) {
+              console.log("请求被取消了", err);
+              return;
+            }
+            console.log(err);
+          });
+      };
+      document.getElementById().onclick = function () {
+        source.cancel();
+      };
+    </script>
+  </body>
+</html>

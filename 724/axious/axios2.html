@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./axios.min.js"></script>
+
+    <script>
+      //请求拦截器,在请求发送出去之前拦截下来并且对其进行处理
+      const incetance = axios.create({
+        baseURL: "http://localhost:3000",
+      });
+      //传两个回调,一个成功的回调一个是失败的回调
+      //成功的回调接受一个参数config,这个config就是请求对象,里面有请求的属性
+      //可以通过修改这个对象,对发送出去的请求进行统一的处理
+      incetance.interceptors.request.use(
+        (config) => {
+          if (
+            config.header["content-type"] ===
+            "application/x-www-form-urlencoded"
+          ) {
+            //表单格式要特殊处理,变成 key=value& 这种格式并返回,服务端才能正确的解析数据
+            config.data = Object.keys(config.data);
+            config.data
+              .reduce((a, i) => {
+                const val = config.data[i];
+                a += `${i}=${val}&`;
+                return a;
+              }, "")
+              .slice(0, -1);
+          }
+          //要return config,后续才能拿到请求对象
+          return config;
+        },
+        () => {}
+      );
+      //响应拦截器,在服务器响应回来之前进行统一处理
+      incetance.interceptors.response.use(
+        (res) => {
+          //请求成功不代表请求里面的操作成功了,比如登录请求成功但是实际上登录失败,所以要进行判断,看请求里面的操作是否真正的成功
+          /*
+            将来返回的响应：
+              // 请求成功
+              {
+                status: 10000,
+                data: {}
+              }
+              {
+                code: 10000,
+                data: {} // 成功的数据
+              }
+              // 请求失败
+              {
+                code: 10001,
+                msg: '失败的原因'
+              }
+          */
+          //判断响应data里面的状态码,确认是否真的操作成功,如成功,则直接返回data里面的data,如失败,返回一个失败状态的promise对象,并附加失败的原因(message)
+
+          //   if (res.data.status === 10000) {
+          //     return res.data.data;
+          //   } else {
+          //     return Promise.reject(res.data.msg);
+          //   }
+
+          //返回响应对象
+          return res.data;
+        },
+        (rea) => {
+          //响应失败情况(并非里面的操作失败,而是请求就是失败的)
+          // 请求失败 非2xx
+          // 根据响应状态码判断不同种类的错误
+          // 从而给用户不同的提示
+          console.dir(err);
+          //通过判断返回的err里面的状态码,给用户返回一个包含失败原因信息的失败状态的promise对象
+          console.log(err.response.status);
+          let msg = "";
+
+          switch (err.response.status) {
+            case 401:
+              msg = "没有权限访问";
+              break;
+            case 404:
+              msg = "该地址找不到";
+              break;
+            default:
+              msg = "发生未知故障，请联系管理员";
+              break;
+          }
+
+          return Promise.reject(msg);
+        }
+      );
+    </script>
+  </body>
+</html>

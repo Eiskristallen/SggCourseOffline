@@ -2,6 +2,7 @@ const path = require("path");
 let htmlwebpackplugin = require("html-webpack-plugin"); //引入html-webpack-plugin插件
 const { rule } = require("_postcss@7.0.32@postcss");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { bind } = require("core-js/fn/function");
 
 module.exports = {
   entry: {

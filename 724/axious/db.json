@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "title": "1111",
+      "author": "2222",
+      "id": 1
+    },
+    {
+      "name": "xo",
+      "age": "hehe",
+      "id": 2
+    },
+    {
+      "name": "xo",
+      "age": "hehe",
+      "id": 3
+    },
+    {
+      "name": "xo",
+      "age": "hehe",
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": [
+    {
+      "name": "typicode"
+    }
+  ]
+}

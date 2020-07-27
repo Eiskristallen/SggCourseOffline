@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <button id="put">put</button>
+    <button id="delete">delete</button>
+    <!-- <script src="./axios.min.js"></script> -->
+    <script>
+      function axios({ method = "GET", url, data, params }, defaults) {
+        return new Promise((res, rej) => {
+          const xhr = new XMLHttpRequest();
+          url = url ? url : defaults;
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) return;
+            if (xhr.status >= 200 && xhr.status < 300) {
+              res({
+                config: {},
+                header: {},
+                data: JSON.parse(xhr.responseText),
+              });
+            } else {
+              rej(`${url}${xhr.statusText}`);
+            }
+          };
+          method = method.toUpperCase();
+          let qs = "";
+          if (params) {
+            const keys = Object.keys(params);
+            qs = keys
+              .reduce((a, i) => {
+                const val = params[i];
+                a += `${i}=${val}&`;
+                return a;
+              }, "?")
+              .slice(0, -1);
+          }
+          xhr.open(method, url + qs, params);
+          if (method === "POST" || method === "PUT") {
+            xhr.setRequestHeader("Content-Type", "application/json");
+            data = JSON.stringify(data);
+            xhr.send(data);
+          }
+          xhr.send();
+        });
+      }
+      //   axios.defaults.baseURL = "http://localhost:3000";
+      document.getElementById("get").onclick = function () {
+        axios(
+          {
+            method: "get",
+          },
+          "http://localhost:3000/posts"
+        )
+          .then((val) => {
+            console.log(val);
+          })
+          .catch((rea) => {
+            console.log(rea);
+          });
+      };
+      document.getElementById("post").onclick = function () {
+        axios(
+          {
+            method: "post",
+
+            data: {
+              name: "xo",
+              age: "hehe",
+            },
+          },
+          "http://localhost:3000/posts"
+        )
+          .then((val) => {
+            console.log(val);
+          })
+          .catch((rea) => {
+            console.log(rea);
+          });
+      };
+      //   document.getElementById("put").onclick = function () {
+      //     axios
+      //       .put("/posts/1", {
+      //         title: "1111",
+      //         author: "2222",
+      //       })
+      //       .then((val) => {
+      //         console.log(val);
+      //       })
+      //       .catch((rea) => {
+      //         console.log(rea);
+      //       });
+      //   };
+      //   document.getElementById("delete").onclick = function () {
+      //     axios
+      //       .delete("/posts/2")
+      //       .then((val) => {
+      //         console.log(val);
+      //       })
+      //       .catch((rea) => {
+      //         console.log(rea);
+      //       });
+      //   };
+    </script>
+  </body>
+</html>
