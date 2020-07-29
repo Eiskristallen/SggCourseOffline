@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      p {
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app1">
+      <p>{{date | myFilter}}</p>
+      <button @click="$destroy()">Click me</button>
+    </div>
+    <script src="vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.8.30/dayjs.min.js"></script>
+    <script>
+      Vue.filter("myFilter", function (val, formatStr = "YYYY-MM-DD HH:mm:ss") {
+        return dayjs(val).format(formatStr);
+      });
+      const filterTest = new Vue({
+        el: "#app1",
+        data: {
+          date: Date.now(),
+        },
+        created() {
+          this.timeID = setInterval(() => {
+            this.date = Date.now();
+          }, 1000);
+        },
+        destroyed() {
+          clearInterval(this.timeID);
+        },
+        // updated() {
+        //   this.date = Date.now();
+        // },
+        filters: {
+          myFilter(val, formatStr = "YYYY-MM-DD HH:mm:ss") {
+            return dayjs(val).format(formatStr);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

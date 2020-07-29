@@ -4,9 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #app1 {
+        width: 200px;
+        height: 300px;
+        background-color: aqua;
+      }
+      .animation-leave-active {
+        animation: move linear 5s;
+      }
+      .animation-enter-active {
+        animation: move linear reverse 5s;
+      }
+      @keyframes move {
+        0% {
+        }
+        20% {
+          width: 100px;
+          height: 420px;
+          background-color: aqua;
+        }
+        40% {
+          width: 234px;
+          height: 543px;
+          background-color: red;
+        }
+        60% {
+          width: 120px;
+          height: 30px;
+          background-color: rebeccapurple;
+        }
+        80% {
+          width: 75px;
+          height: 600px;
+          background-color: aquamarine;
+        }
+        100% {
+          width: 100px;
+          height: 421px;
+          background-color: blanchedalmond;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="app2">
+      <transition name="animation" mode="">
+        <div id="app1" v-if="isShow"></div>
+      </transition>
+      <button @click="isShow = !isShow"></button>
+    </div>
+
     <script src="vue.js"></script>
-    <script></script>
+    <script>
+      const animationTest = new Vue({
+        el: "#app2",
+        data: {
+          isShow: true,
+        },
+      });
+    </script>
   </body>
 </html>
