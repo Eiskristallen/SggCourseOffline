@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app1">
+      <button @click="onHandle(1,2,$event)" @click.prevent.stop="hehe">
+        click me
+      </button>
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+      const test = new Vue({
+        el: "#app1",
+        data: {
+          msg: "haha",
+        },
+        methods: {
+          onHandle(...arg) {
+            console.log(...arg);
+          },
+          hehe() {
+            console.log("catched");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

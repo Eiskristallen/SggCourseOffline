@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="area1">
+      <ul>
+        <li v-for="person,index of person" :key="person.id">
+          {{person.name}}--{{person.age}}--{{person.id}}
+        </li>
+      </ul>
+      <ul>
+        <li v-for="val,key of person[0]" :key="Math.random()">
+          {{key}}+{{val}}
+        </li>
+      </ul>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+      const a = new Vue({
+        el: "#area1",
+        data: {
+          person: [
+            { id: 1, name: "xiaoming0", age: 18 },
+            { id: 2, name: "xiaoming1", age: 22 },
+            { id: 3, name: "xiaoming2", age: 55 },
+            { id: 4, name: "xiaoming3", age: 23 },
+          ],
+        },
+        methods: {},
+        watch: {},
+        computed: {},
+      });
+    </script>
+  </body>
+</html>

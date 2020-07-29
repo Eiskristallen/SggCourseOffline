@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app1">
+      <h1 :style="{opacity: opacity}">VUE</h1>
+      <button @click="handleClick">click me to stop</button>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+      const transparencyTest = new Vue({
+        el: "#app1",
+        data: {
+          opacity: 1,
+        },
+        methods: {
+          handleClick() {
+            this.$destroy();
+          },
+        },
+        created() {
+          this.timeID = setInterval(() => {
+            let { opacity } = this;
+            opacity -= 0.01;
+            if (opacity <= 0) {
+              opacity = 1;
+            }
+            this.opacity = opacity;
+          }, 1000 / 60);
+        },
+        destroyed() {
+          clearInterval(this.timeID);
+        },
+      });
+    </script>
+  </body>
+</html>

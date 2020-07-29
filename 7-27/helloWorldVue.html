@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- :value是v-bind强制数据绑定(单向) 
+            v-model是双向数据绑定(model=>view  view=>model)
+           v-on:click 是绑定click事件(@-click是简写)-->
+      <!-- <input type="text" value="msg" />
+      <input type="text" v-model.trim="msg" @input="inPut" /> -->
+      <input type="text" v-model="msg" />
+      <input type="text" v-model="msg2" />
+      <input type="text" :value="hehe" />
+      <button v-on:click="handleClick">Click Me</button>
+      <p v-once>{{msg}}</p>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+      const a = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello vue",
+          msg2: "22",
+        },
+        //事件的回调函数
+        methods: {
+          handleClick: (e) => {
+            alert("xx");
+          },
+          inPut(e) {
+            console.log(123);
+          },
+        },
+        computed: {
+          hahah: {
+            get() {
+              return this.msg + this.msg2;
+            },
+            set(val) {
+              const [msg, msg2] = val.splic(" ");
+              this.msg = msg;
+              this.msg2 = msg2;
+            },
+          },
+          hehe: (vm) => vm.msg,
+        },
+      });
+      a.$watch("hahah", function (newVal, oldVal) {
+        console.log(newVal, oldVal);
+      });
+
+      const b = Vue.component("my-component");
+      console.log(b);
+    </script>
+  </body>
+</html>

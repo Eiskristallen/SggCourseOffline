@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="demo">
+      <form action="/xxx">
+        <span>用户名: </span>
+        <input type="text" v-model="username" />
+        <br />
+
+        <span>密码: </span>
+        <input type="password" v-model="password" />
+        <br />
+
+        <span>性别: </span>
+        <input type="radio" id="female" v-model="gender" value="1" />
+        <label for="female">女</label>
+        <input type="radio" id="male" v-model="gender" value="0" />
+        <label for="male">男</label>
+        <br />
+
+        <span>爱好: </span>
+        <input type="checkbox" id="basket" v-model="hobby" value="basketball" />
+        <label for="basket">篮球</label>
+        <input type="checkbox" id="foot" v-model="hobby" value="football" />
+        <label for="foot">足球</label>
+        <input type="checkbox" id="pingpang" v-model="hobby" value="pingpong" />
+        <label for="pingpang">乒乓</label>
+        <br />
+
+        <span>城市: </span>
+        <!-- 
+            当你选中option时，如果option设置了value属性，那么select收集到的就是value属性
+            如果没有value属性，那么select收集到的就是option里面的内容
+          -->
+        <select v-model="city">
+          <option value="">未选择</option>
+          <option v-for="city of cities" :value="city.id" :key="city.id">
+            {{city.name}}
+          </option>
+        </select>
+        <br />
+
+        <span>介绍: </span>
+        <textarea rows="10" v-model="intro"></textarea>
+        <br />
+        <br />
+
+        <input type="submit" value="注册" @click.prevent="handleClick" />
+      </form>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+      const formTest = new Vue({
+        el: "#demo",
+        data: {
+          username: "",
+          password: "",
+          gender: 1,
+          cities: [
+            { id: 1, name: "深圳" },
+            { id: 2, name: "北京" },
+            { id: 3, name: "上海" },
+          ],
+          city: "",
+          hobby: [],
+          intro: "",
+        },
+        methods: {
+          handleClick() {
+            let { username, password, gender, city, hobby, intro } = this;
+            gender = !!gender ? "男" : "女";
+            console.log(username, password, gender, city, hobby, intro);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

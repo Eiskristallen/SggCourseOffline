@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 
+      
+      Vue元素的生命周期函数
+      1.初始阶段,会在new Vue的时候自动触发,只能触发一次
+         1.beforeCreate()/ 会在数据代理之前触发,所以此时还无法拿到data里面的数据
+         2.created()/ 在数据代理之后触发,此时可以获取到data里面的数据了
+         3.beforeMount() / 在模板解析之前触发
+         4.mounted() / 在模板解析之后触发
+      2.更新阶段(每当数据改动时触发,可以触发多次)
+        1.beforeUpdate() / 在数据更新前触发,但是此时数据其实已经更新到最新了
+        2.updated() / 在数据更新后触发,可以拿到最新的数据
+     3.销毁阶段(调用实例对象.$destroy方法,也只会触发一次)
+        1.beforeDestroy() / 在销毁前触发
+        2.destroyed() / 销毁触发,用来处理一些收尾工作(清除定时器,解绑事件)
+       
+    
+      
+      
+      
+       */
+    </script>
+  </body>
+</html>
