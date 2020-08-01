@@ -21,6 +21,7 @@
    
   -->
   <div>
+    <HelloVue></HelloVue>
     <h1 class="title">{{ title }}</h1>
   </div>
 </template>

@@ -69,11 +69,11 @@ module.exports = {
       {
         from: path.resolve(__dirname, "public"),
         to: path.resolve(__dirname, "dist"),
-        globOptions: {
-          // 忽略 index.html 不复制
-          // 原因：因为 index.html 已经被 HtmlWebpackPlugin 处理过了
-          ignore: ["index.html"],
-        },
+        // globOptions: {
+        // 忽略 index.html 不复制
+        // 原因：因为 index.html 已经被 HtmlWebpackPlugin 处理过了
+        ignore: ["index.html"],
+        // },
       },
     ]),
   ],
