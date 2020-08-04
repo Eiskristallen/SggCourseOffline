@@ -4,9 +4,6 @@ import App from "./App";
 Vue.config.productionTip = false;
 
 new Vue({
-  beforeCreate() {
-    Vue.prototype.$globalEventBus = this;
-  },
   //渲染
   render: (h) => h(App),
   //挂载

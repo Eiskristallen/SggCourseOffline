@@ -2,26 +2,30 @@
   <div>
     <li class="list-group-item">
       <div class="handle">
-        <a href="javascript:;" @click="onDelete">删除</a>
+        <a href="javascript:;">删除</a>
       </div>
       <p class="user">
-        <span>{{ comment.name }}</span>
-        <span>说:</span>
+        <span>{{ comment.name }}</span
+        ><span>说:</span>
       </p>
       <p class="centence">{{ comment.content }}</p>
     </li>
   </div>
 </template>
+
 <script>
 export default {
-  props: ["comment", "deleteComment"],
+  //数组方案只要声明属性不需要类型
+  props: ["comment"],
+  data() {
+    return {};
+  },
   methods: {
     onDelete() {
-      if (!confirm("you sure to delete the selecting comment?")) return;
-
-      this.deleteComment(this.comment.id);
+      this.deleteC(this.comment.id);
     },
   },
 };
 </script>
+
 <style scoped></style>

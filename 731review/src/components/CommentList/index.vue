@@ -1,7 +1,9 @@
 <template>
   <div>
     <h3 class="reply">评论回复：</h3>
-    <h2 style="display: none">暂无评论，点击左侧添加评论！！！</h2>
+    <h2 style="display: none" v-show="!comment.length">
+      暂无评论，点击左侧添加评论！！！
+    </h2>
     <ul class="list-group">
       <CommentDel
         v-for="comment in comments"
@@ -21,4 +23,4 @@ export default {
   },
 };
 </script>
-<style  scoped></style>
+<style scoped></style>

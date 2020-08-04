@@ -5,7 +5,7 @@ Vue.config.productionTip = false;
 
 new Vue({
   beforeCreate() {
-    Vue.prototype.$globalEventBus = this;
+    Vue.prototype.$bus = this;
   },
   //渲染
   render: (h) => h(App),
