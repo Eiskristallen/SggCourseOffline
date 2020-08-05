@@ -6,19 +6,21 @@
       v-for="item of items"
       :key="item.id"
       :class="{ 'item-bg': isShow }"
-      @mouseenter="isShow=true"
-      @mouseleave="isShow=false"
+      @mouseenter="isShow = true"
+      @mouseleave="isShow = false"
     >
       <label>
         <input type="checkbox" v-model="item.done" />
-        <span>{{ 1 }}</span>
+        <span>{{ item.itemName }}</span>
       </label>
       <button
         class="btn btn-danger"
         style="display:none"
         v-show="isShow"
         @click="handelDeleteSingle(item.id)"
-      >删除</button>
+      >
+        删除
+      </button>
     </li>
   </div>
 </template>
