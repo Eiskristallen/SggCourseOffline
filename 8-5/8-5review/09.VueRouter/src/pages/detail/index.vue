@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul>
-      <!-- <li>{{ detail.id }}</li> -->
-      <!-- <li>{{ detail.content }}</li> -->
+      <li>{{ detail.id }}</li>
+      <li>{{ detail.content }}</li>
     </ul>
   </div>
 </template>
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      detail: { id: 123 },
+      detail: {},
     };
   },
   created() {
@@ -24,19 +24,19 @@ export default {
       this.messages = messages;
       const id = +this.$route.params.id;
       const detail = messages.find((item) => {
-        item.id === id;
+        return item.id === id;
       });
-
-      console.log(this);
+      console.log(detail);
       this.detail = detail;
     }, 1000);
   },
   watch: {
     $route(newVal) {
       const id = newVal.params.id;
-      this.detail = this.messages.find((item) => {
-        item.id === id;
+      const detail = this.messages.find((item) => {
+        return item.id === id;
       });
+      this.detail = detail;
     },
   },
 };
