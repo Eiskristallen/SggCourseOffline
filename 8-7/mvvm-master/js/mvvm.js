@@ -1,3 +1,5 @@
+//MVVM实现数据代理和双向数据绑定
+//主要三件事,数据代理,数据劫持(observe),和模板解析(Compile)
 function MVVM(options) {
   this.$options = options || {};
   var data = (this._data = this.$options.data);
@@ -10,7 +12,7 @@ function MVVM(options) {
   });
 
   this._initComputed();
-
+  //数据劫持(监听) 把数据变成响应式
   observe(data, this);
 
   this.$compile = new Compile(options.el || document.body, this);
